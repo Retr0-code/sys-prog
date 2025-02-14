@@ -7,19 +7,22 @@ int main(int argc, char *argv[])
     void filecopy(FILE *, FILE *);
     char *prog = argv[0];
 
+    // By default stdin writes to stdout
     if (argc == 1) {
         filecopy(stdin, stdout);
     }
     else {
+        // Iterate through all arguments
         while (--argc > 0) {
+            // Opens file of next argument
             if ((fp = fopen(*++argv, "r")) == NULL) {
+                // On fail
                 fprintf(stderr, "%s: can't open %s\n", prog, *argv);
                 exit(1);
             }
-            else {
-                filecopy(fp, stdout);
-                fclose(fp);
-            }
+            // Prints file to stdout
+            filecopy(fp, stdout);
+            fclose(fp);
         }
         
     }
